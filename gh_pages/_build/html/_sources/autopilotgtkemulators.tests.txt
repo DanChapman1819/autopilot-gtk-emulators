@@ -1,0 +1,19 @@
+tests Package
+=============
+
+:mod:`tests` Package
+--------------------
+
+.. automodule:: autopilotgtkemulators.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_emulator` Module
+---------------------------
+
+.. automodule:: autopilotgtkemulators.tests.test_emulator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

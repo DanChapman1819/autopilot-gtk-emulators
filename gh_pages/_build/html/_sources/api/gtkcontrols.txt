@@ -1,0 +1,10 @@
+``autopilotgtkemulators.gtkcontrols`` GtkControls Instance Emulators
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+:mod:`gtkcontrols` Module
+-------------------------
+
+.. automodule:: autopilotgtkemulators.gtkcontrols
+    :members:
+    :undoc-members:
+    :show-inheritance:

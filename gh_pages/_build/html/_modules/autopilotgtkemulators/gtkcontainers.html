@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>autopilotgtkemulators.gtkcontainers &mdash; autopilotgtkemulators  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="autopilotgtkemulators  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for autopilotgtkemulators.gtkcontainers</h1><div class="highlight"><pre>
+<span class="c"># -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-</span>
+<span class="c">#</span>
+<span class="c"># Copyright (C) 2013</span>
+<span class="c">#</span>
+<span class="c"># Author: Daniel Chapman daniel@chapman-mail.com</span>
+<span class="c">#</span>
+<span class="c"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c"># the Free Software Foundation; version 3.</span>
+<span class="c">#</span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span class="c"># GNU Lesser General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c"># along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">autopilot.input</span> <span class="kn">import</span> <span class="n">Pointer</span><span class="p">,</span> <span class="n">Mouse</span><span class="p">,</span> <span class="n">Keyboard</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators</span> <span class="kn">import</span> <span class="n">AutopilotGtkEmulatorBase</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators.gtkcontrols</span> <span class="kn">import</span> <span class="n">GtkLabel</span><span class="p">,</span> <span class="n">GtkToolButton</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators</span> <span class="kn">import</span> <span class="n">gtkaccessible</span>
+
+
+<div class="viewcode-block" id="GtkPathBar"><a class="viewcode-back" href="../../api/modules/gtkcontainers.html#autopilotgtkemulators.gtkcontainers.GtkPathBar">[docs]</a><span class="k">class</span> <span class="nc">GtkPathBar</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkPathBar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GtkPathBar.is_path_in_pathbar"><a class="viewcode-back" href="../../api/modules/gtkcontainers.html#autopilotgtkemulators.gtkcontainers.GtkPathBar.is_path_in_pathbar">[docs]</a>    <span class="k">def</span> <span class="nf">is_path_in_pathbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">):</span>
+        <span class="c"># lets split the path</span>
+        <span class="n">split_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_splitpath</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_many</span><span class="p">(</span><span class="s">&#39;GtkLabel&#39;</span><span class="p">)</span>
+        <span class="c"># if we just get the last dir in the path (which should be our cwd)</span>
+        <span class="c"># and check for a label in pathbar which should be in bold</span>
+        <span class="n">last_dir</span> <span class="o">=</span> <span class="n">split_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="s">&#39;&lt;b&gt;</span><span class="si">%s</span><span class="s">&lt;/b&gt;&#39;</span> <span class="o">%</span> <span class="n">last_dir</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;path bar did not contain </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">last_dir</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_splitpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="n">path_parts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">path_parts</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">path_parts</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">path_parts</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">path_parts</span>
+
+</div>
+<div class="viewcode-block" id="GtkToolbar"><a class="viewcode-back" href="../../api/modules/gtkcontainers.html#autopilotgtkemulators.gtkcontainers.GtkToolbar">[docs]</a><span class="k">class</span> <span class="nc">GtkToolbar</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Emulator class for a GtkToolBarInstance</span>
+<span class="sd">    </span>
+<span class="sd">        DO_NOT_USE this is not complete or even working in a sane fashion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkToolbar</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkToolbar.click_tool_button"><a class="viewcode-back" href="../../api/modules/gtkcontainers.html#autopilotgtkemulators.gtkcontainers.GtkToolbar.click_tool_button">[docs]</a>    <span class="k">def</span> <span class="nf">click_tool_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_button</span><span class="p">(</span><span class="s">&#39;GtkToolButton&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="GtkBox"><a class="viewcode-back" href="../../api/modules/gtkcontainers.html#autopilotgtkemulators.gtkcontainers.GtkBox">[docs]</a><span class="k">class</span> <span class="nc">GtkBox</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkBox</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Dan Chapman.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

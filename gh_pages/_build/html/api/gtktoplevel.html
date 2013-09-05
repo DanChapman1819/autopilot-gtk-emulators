@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>autopilotgtkemulators.gtktoplevel Module &mdash; autopilotgtkemulators  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="autopilotgtkemulators  documentation" href="../index.html" />
+    <link rel="next" title="autopilotgtkemulators.gtkcontrols GtkControls Instance Emulators" href="gtkcontrols.html" />
+    <link rel="prev" title="Welcome to autopilotgtkemulators’s tutorial!" href="../tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gtkcontrols.html" title="autopilotgtkemulators.gtkcontrols GtkControls Instance Emulators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="Welcome to autopilotgtkemulators’s tutorial!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">autopilotgtkemulators  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-autopilotgtkemulators.gtktoplevel">
+<span id="autopilotgtkemulators-gtktoplevel-module"></span><h1><a class="reference internal" href="#module-autopilotgtkemulators.gtktoplevel" title="autopilotgtkemulators.gtktoplevel"><tt class="xref py py-mod docutils literal"><span class="pre">autopilotgtkemulators.gtktoplevel</span></tt></a> Module<a class="headerlink" href="#module-autopilotgtkemulators.gtktoplevel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gtkwindow-class">
+<h2><a class="reference internal" href="#autopilotgtkemulators.gtktoplevel.GtkWindow" title="autopilotgtkemulators.gtktoplevel.GtkWindow"><tt class="xref py py-class docutils literal"><span class="pre">GtkWindow</span></tt></a> Class<a class="headerlink" href="#gtkwindow-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkWindow">
+<em class="property">class </em><tt class="descclassname">autopilotgtkemulators.gtktoplevel.</tt><tt class="descname">GtkWindow</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">autopilotgtkemulators.AutopilotGtkEmulatorBase</span></tt></p>
+<p>Emulator class for a GtkWindow instance</p>
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkWindow.get_dialog">
+<tt class="descname">get_dialog</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkWindow.get_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkWindow.get_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets an object for a dialog window</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dialogType</strong> &#8211; Window type of the dialog e.g &#8216;GtkDialog&#8217;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dialog object of the given dialogType</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><strong>EmulatorException</strong> if a root instance cannot be obtained</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><strong>ValueError</strong> if the returned object is NoneType</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkWindow.open_openfile_dialog">
+<tt class="descname">open_openfile_dialog</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkWindow.open_openfile_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkWindow.open_openfile_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the open file dialog</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dialogType</strong> &#8211; defaults to GtkFileChooserDialog if you have created
+a custom dialog emulator then just override the default
+dialog type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an object of the open dialog</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><strong>ValueError</strong> if returned object is None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkWindow.open_print_dialog">
+<tt class="descname">open_print_dialog</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkWindow.open_print_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkWindow.open_print_dialog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkWindow.open_save_dialog">
+<tt class="descname">open_save_dialog</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkWindow.open_save_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkWindow.open_save_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the save dialog</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dialogType</strong> &#8211; defaults to GtkFileChooserDialog if you have created
+a custom dialog emulator then just override the default
+dialog type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an object of the save dialog</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><strong>ValueError</strong> if returned object is None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gtkfilechooserdialog-class">
+<h2><a class="reference internal" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog" title="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog"><tt class="xref py py-class docutils literal"><span class="pre">GtkFileChooserDialog</span></tt></a> Class<a class="headerlink" href="#gtkfilechooserdialog-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog">
+<em class="property">class </em><tt class="descclassname">autopilotgtkemulators.gtktoplevel.</tt><tt class="descname">GtkFileChooserDialog</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">autopilotgtkemulators.AutopilotGtkEmulatorBase</span></tt></p>
+<p>Emulator class for a gtk file chooser dialog</p>
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.create_folder_with_name">
+<tt class="descname">create_folder_with_name</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.create_folder_with_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.create_folder_with_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a folder with given name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folderName</strong> &#8211; name of folder</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.enter_file_name">
+<tt class="descname">enter_file_name</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.enter_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.enter_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enter the name of the file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> &#8211; Name of file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_create_folder_button">
+<tt class="descname">get_create_folder_button</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.get_create_folder_button"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_create_folder_button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the create folder button</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_file_chooser_entry">
+<tt class="descname">get_file_chooser_entry</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.get_file_chooser_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_file_chooser_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the file chooser entry in a GtkFileChooserDialog</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Returns an object of the GtkFileChooserEntry</td>
+</tr>
+</tbody>
+</table>
+<p>Which then provides access to the <tt class="xref py py-class docutils literal"><span class="pre">GtkFileChooserEntry</span></tt> emulator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_path_bar">
+<tt class="descname">get_path_bar</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.get_path_bar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.get_path_bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the path bar in a GtkFileChooserDialog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.go_to_directory">
+<tt class="descname">go_to_directory</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/autopilotgtkemulators/gtktoplevel.html#GtkFileChooserDialog.go_to_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog.go_to_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Navigates the file chooser dialog to the given directory path</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dir_path</strong> &#8211; path to required directory e.g &#8216;/tmp&#8217;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">autopilotgtkemulators.gtktoplevel</span></tt> Module</a><ul>
+<li><a class="reference internal" href="#gtkwindow-class"><tt class="docutils literal"><span class="pre">GtkWindow</span></tt> Class</a></li>
+<li><a class="reference internal" href="#gtkfilechooserdialog-class"><tt class="docutils literal"><span class="pre">GtkFileChooserDialog</span></tt> Class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../tutorial.html"
+                        title="previous chapter">Welcome to autopilotgtkemulators&#8217;s tutorial!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gtkcontrols.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">autopilotgtkemulators.gtkcontrols</span></tt> GtkControls Instance Emulators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/gtktoplevel.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gtkcontrols.html" title="autopilotgtkemulators.gtkcontrols GtkControls Instance Emulators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../tutorial.html" title="Welcome to autopilotgtkemulators’s tutorial!"
+             >previous</a> |</li>
+        <li><a href="../index.html">autopilotgtkemulators  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Dan Chapman.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+``autopilotgtkemulators.gtkcontainers`` GtkContainers Emulator Module
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+:class:`GtkPathBar` Class
+---------------------------
+
+.. autoclass:: autopilotgtkemulators.gtkcontainers.GtkPathBar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    
+:class:`GtkToolbar` Class
+-------------------------
+
+.. autoclass:: autopilotgtkemulators.gtkcontainers.GtkToolbar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    
+:class:`GtkBox` Class
+---------------------
+
+.. autoclass:: autopilotgtkemulators.gtkcontainers.GtkBox
+    :members:
+    :undoc-members:
+    :show-inheritance:
