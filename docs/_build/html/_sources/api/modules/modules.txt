@@ -1,0 +1,22 @@
+AutopilotGtkEmulators
+==============================
+
+:mod:`autopilotgtkemulators.gtktoplevel` Module
+-----------------------------------------------
+.. automodule:: autopilotgtkemulators.gtktoplevel
+    
+.. toctree::
+   :maxdepth: 4
+   :glob:
+   
+   class/toplevel/gtkwindow
+   
+:mod:`autopilotgtkemulators.gtkcontainers`
+------------------------------------------
+.. automodule:: autopilotgtkemulators.gtkcontainers
+
+.. toctree::
+    :maxdepth: 4
+    :glob:
+    
+    class/containers/gtkpathbar

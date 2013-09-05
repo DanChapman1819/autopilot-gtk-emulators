@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>autopilotgtkemulators.gtkcontrols &mdash; autopilotgtkemulators  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="autopilotgtkemulators  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for autopilotgtkemulators.gtkcontrols</h1><div class="highlight"><pre>
+<span class="c"># -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-</span>
+<span class="c">#</span>
+<span class="c"># Copyright (C) 2013</span>
+<span class="c">#</span>
+<span class="c"># Author: Daniel Chapman daniel@chapman-mail.com</span>
+<span class="c">#</span>
+<span class="c"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c"># it under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c"># the Free Software Foundation; version 3.</span>
+<span class="c">#</span>
+<span class="c"># This program is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span class="c"># GNU Lesser General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c"># along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">autopilot.input</span> <span class="kn">import</span> <span class="n">Pointer</span><span class="p">,</span> <span class="n">Mouse</span><span class="p">,</span> <span class="n">Keyboard</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators</span> <span class="kn">import</span> <span class="n">AutopilotGtkEmulatorBase</span>
+
+
+<div class="viewcode-block" id="GtkEntry"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkEntry">[docs]</a><span class="k">class</span> <span class="nc">GtkEntry</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkEntry</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GtkEntry.enter_text"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkEntry.enter_text">[docs]</a>    <span class="k">def</span> <span class="nf">enter_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_focus</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="c"># if the entry is not empty lets empty it first</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Ctrl+a&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Delete&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">text</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="GtkFileChooserEntry"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkFileChooserEntry">[docs]</a><span class="k">class</span> <span class="nc">GtkFileChooserEntry</span><span class="p">(</span><span class="n">GtkEntry</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; extends GtkEntry emulator&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkFileChooserEntry</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GtkFileChooserEntry.enter_text"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkFileChooserEntry.enter_text">[docs]</a>    <span class="k">def</span> <span class="nf">enter_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">isDirPath</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_focus</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="c"># if the entry is not empty lets empty it first</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Ctrl+a&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Delete&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="c">#lets delete any highlighted autocompletion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Delete&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">text</span>
+        <span class="c"># if the text is a directory path then we want to hit enter</span>
+        <span class="c"># to navigate to path so we can enter filename in correct path</span>
+        <span class="k">if</span> <span class="n">isDirPath</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Enter&#39;</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkButton">[docs]</a><span class="k">class</span> <span class="nc">GtkButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkButton.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkToolButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkToolButton">[docs]</a><span class="k">class</span> <span class="nc">GtkToolButton</span><span class="p">(</span><span class="n">GtkButton</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkToolButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+</div>
+<div class="viewcode-block" id="GtkLabel"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkLabel">[docs]</a><span class="k">class</span> <span class="nc">GtkLabel</span><span class="p">(</span><span class="n">GtkButton</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkLabel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+</div>
+<div class="viewcode-block" id="GtkToggleButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkToggleButton">[docs]</a><span class="k">class</span> <span class="nc">GtkToggleButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkToggleButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkToggleButton.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkToggleButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#get current state</span>
+        <span class="n">new_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_val</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now wait for state to change</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">new_val</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkToggleToolButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkToggleToolButton">[docs]</a><span class="k">class</span> <span class="nc">GtkToggleToolButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkToggleToolButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkToggleToolButton.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkToggleToolButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#get current state</span>
+        <span class="n">new_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_val</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now wait for state to change</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">new_val</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkMenuToolButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkMenuToolButton">[docs]</a><span class="k">class</span> <span class="nc">GtkMenuToolButton</span><span class="p">(</span><span class="n">GtkButton</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkMenuToolButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+</div>
+<div class="viewcode-block" id="GtkCheckButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkCheckButton">[docs]</a><span class="k">class</span> <span class="nc">GtkCheckButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkCheckButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkCheckButton.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkCheckButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#get current state</span>
+        <span class="n">new_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_val</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now wait for state to change</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">new_val</span><span class="p">)</span>
+        <span class="c"># TODO: lets look for its accessible prop and check that checked == True</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkRadioButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkRadioButton">[docs]</a><span class="k">class</span> <span class="nc">GtkRadioButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkRadioButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkRadioButton.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkRadioButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#get current state</span>
+        <span class="n">new_val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new_val</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now wait for state to change</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">new_val</span><span class="p">)</span>
+        <span class="c"># TODO: lets look for its accessible prop and check that checked == True</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkSwitch"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkSwitch">[docs]</a><span class="k">class</span> <span class="nc">GtkSwitch</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkSwitch</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkSwitch.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkSwitch.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#TODO: add checks to assert the switched changed state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+</div></div>
+<div class="viewcode-block" id="GtkTreeView"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkTreeView">[docs]</a><span class="k">class</span> <span class="nc">GtkTreeView</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkTreeView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkTreeView.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkTreeView.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This simply clicks a treeview object &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span> <span class="o">==</span> <span class="mi">1</span>
+    </div>
+<div class="viewcode-block" id="GtkTreeView.select_item"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkTreeView.select_item">[docs]</a>    <span class="k">def</span> <span class="nf">select_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label_text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Selects an item in a GtkTreeView by its UI label text</span>
+
+<span class="sd">            e.g. If you want to click say an item displaying &#39;Home&#39; in a treeview</span>
+<span class="sd">            then it would be</span>
+<span class="sd">                .select_item(&#39;Home&#39;)</span>
+<span class="sd">                </span>
+<span class="sd">            also see GtkFileChooserDialog.go_to_directory() for another example</span>
+<span class="sd">            </span>
+<span class="sd">            if for some reason this doesn&#39;t work then use the .click()</span>
+<span class="sd">            function to get the treeviews focus</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">treeview</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_gail_treeview</span><span class="p">()</span>
+        <span class="c"># if we can&#39;t get the gail treeview lets try a full scan</span>
+        <span class="k">if</span> <span class="n">treeview</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_root_instance</span><span class="p">()</span>
+            <span class="n">treeview_item</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkCellTextAccessible&#39;</span><span class="p">,</span>
+                                               <span class="n">accessible_name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">label_text</span><span class="p">))</span>
+            <span class="k">assert</span> <span class="n">treeview_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="n">treeview_item</span>
+        <span class="c">#and now select the item from within the GAILTreeView. </span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">treeview</span><span class="o">.</span><span class="n">select_item</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">label_text</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="n">item</span>
+            </div>
+    <span class="k">def</span> <span class="nf">_get_gail_treeview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c"># lets get a root instance</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_root_instance</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="c"># As the treeview item is in the GAILWindow tree and not our current tree</span>
+        <span class="c"># We want to select the treeviewaccessible with the same globalRect as us</span>
+        <span class="n">treeviews</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">select_many</span><span class="p">(</span><span class="s">&#39;GtkTreeViewAccessible&#39;</span><span class="p">,</span>
+                                     <span class="n">globalRect</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">globalRect</span><span class="p">)</span>
+        <span class="c"># if the treeviews are nested they could potentially have the</span>
+        <span class="c"># same globalRect so lets pick out the one thats visible</span>
+        <span class="k">for</span> <span class="n">treeview</span> <span class="ow">in</span> <span class="n">treeviews</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">treeview</span><span class="o">.</span><span class="n">visible</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">treeview</span>
+        </div>
+<div class="viewcode-block" id="GtkComboBox"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkComboBox">[docs]</a><span class="k">class</span> <span class="nc">GtkComboBox</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkComboBox</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkComboBox.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkComboBox.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#TODO: setup state changes</span>
+        <span class="c">#get current state i.e is it already open?</span>
+
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now check the state after to check that it changed</span>
+        <span class="c">#if not throw an error</span>
+        
+    
+    <span class="c">#TODO: can we create a function for selecting an item inside the</span>
+    <span class="c">#       combobox</span>
+
+</div></div>
+<div class="viewcode-block" id="GtkComboBoxText"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkComboBoxText">[docs]</a><span class="k">class</span> <span class="nc">GtkComboBoxText</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkComboBoxText</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkComboBoxText.click"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkComboBoxText.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#TODO: setup state changes</span>
+        <span class="c">#get current state i.e is it already open?</span>
+
+        <span class="c">#now click it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c">#now check the state after to check that it changed</span>
+        <span class="c">#if not throw an error</span>
+        
+    <span class="c">#TODO: can we create a function for selecting an item inside the</span>
+    <span class="c">#       combobox</span>
+</div></div>
+<div class="viewcode-block" id="GtkSpinButton"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkSpinButton">[docs]</a><span class="k">class</span> <span class="nc">GtkSpinButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkSpinButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkSpinButton.enter_value"><a class="viewcode-back" href="../../api/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkSpinButton.enter_value">[docs]</a>    <span class="k">def</span> <span class="nf">enter_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#TODO: sort out entering a value in a spinbutton entry</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_entry</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">_select_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="c">#TODO: as experienced on ubiquity test when selecting a spin button</span>
+        <span class="c"># when the mouse clicks the center it does not get the entry focus</span>
+        <span class="c"># so we have to move mouse left by 10 px and click again to get entry focus</span>
+        <span class="c"># I&#39;m not sure how safe this is and if it should be just left out.</span>
+        <span class="c">#We should have a way to use the spin button in ap though??</span>
+        <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="GtkFileChooserButton"><a class="viewcode-back" href="../../api/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkFileChooserButton">[docs]</a><span class="k">class</span> <span class="nc">GtkFileChooserButton</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkFileChooserButton</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+
+<div class="viewcode-block" id="GtkFileChooserButton.click"><a class="viewcode-back" href="../../api/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkFileChooserButton.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This returns the GtkFileChooserDialog object</span>
+<span class="sd">            that opens after button is clicked</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_file_chooser_dialog</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">dialog</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_file_chooser_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_root_instance</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkFileChooserDialog&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">dialog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="n">dialog</span>
+
+</div>
+<div class="viewcode-block" id="GtkTextView"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkTextView">[docs]</a><span class="k">class</span> <span class="nc">GtkTextView</span><span class="p">(</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GtkTextView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GtkTextView.enter_text"><a class="viewcode-back" href="../../api/modules/gtkcontrols.html#autopilotgtkemulators.gtkcontrols.GtkTextView.enter_text">[docs]</a>    <span class="k">def</span> <span class="nf">enter_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_focus</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="c"># if the entry is not empty lets empty it first</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Ctrl+a&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s">&#39;Delete&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">==</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">==</span> <span class="n">text</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span><span class="o">.</span><span class="n">click_object</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_focus</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Dan Chapman.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

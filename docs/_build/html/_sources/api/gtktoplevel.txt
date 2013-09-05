@@ -1,0 +1,19 @@
+:mod:`autopilotgtkemulators.gtktoplevel` Module
+-----------------------------------------------
+.. automodule:: autopilotgtkemulators.gtktoplevel
+
+:class:`GtkWindow` Class
+++++++++++++++++++++++++
+
+.. autoclass:: autopilotgtkemulators.gtktoplevel.GtkWindow
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    
+:class:`GtkFileChooserDialog` Class
++++++++++++++++++++++++++++++++++++
+
+.. autoclass:: autopilotgtkemulators.gtktoplevel.GtkFileChooserDialog
+    :members:
+    :undoc-members:
+    :show-inheritance:

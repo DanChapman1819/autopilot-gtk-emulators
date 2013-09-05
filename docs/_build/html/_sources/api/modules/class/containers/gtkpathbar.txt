@@ -1,0 +1,10 @@
+``autopilotgtkemulators.gtkcontainers.GtkPathBar`` GtkPathBar
+=========================================================
+
+:class:`GtkPathBar` Class
+++++++++++++++++++++++++
+
+.. autoclass:: autopilotgtkemulators.gtkcontainers.GtkPathBar
+    :members:
+    :undoc-members:
+    :show-inheritance:

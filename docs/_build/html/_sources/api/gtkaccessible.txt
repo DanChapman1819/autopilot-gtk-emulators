@@ -1,0 +1,10 @@
+``autopilotgtkemulators.gtkaccessible`` GtkAccessible Instance Emulators
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+:mod:`gtkaccessible` Module
+---------------------------
+
+.. automodule:: autopilotgtkemulators.gtkaccessible
+    :members:
+    :undoc-members:
+    :show-inheritance:

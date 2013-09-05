@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>autopilotgtkemulators.tests.test_emulator &mdash; autopilotgtkemulators  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="autopilotgtkemulators  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for autopilotgtkemulators.tests.test_emulator</h1><div class="highlight"><pre>
+ <span class="c">#-*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-</span>
+ <span class="c">#</span>
+ <span class="c">#Copyright (C) 2013</span>
+ <span class="c">#</span>
+ <span class="c">#Author: Daniel Chapman daniel@chapman-mail.com</span>
+ <span class="c">#</span>
+ <span class="c">#This program is free software; you can redistribute it and/or modify</span>
+ <span class="c">#it under the terms of the GNU Lesser General Public License as published by</span>
+ <span class="c">#the Free Software Foundation; version 3.</span>
+ <span class="c">#</span>
+ <span class="c">#This program is distributed in the hope that it will be useful,</span>
+ <span class="c">#but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+ <span class="c">#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+ <span class="c">#GNU Lesser General Public License for more details.</span>
+ <span class="c">#</span>
+ <span class="c">#You should have received a copy of the GNU Lesser General Public License</span>
+ <span class="c">#along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">autopilot.matchers</span> <span class="kn">import</span> <span class="n">Eventually</span>
+<span class="kn">from</span> <span class="nn">testtools.matchers</span> <span class="kn">import</span> <span class="n">Equals</span><span class="p">,</span> <span class="n">FileExists</span><span class="p">,</span> <span class="n">Contains</span>
+<span class="kn">from</span> <span class="nn">autopilot.input</span> <span class="kn">import</span> <span class="n">Pointer</span><span class="p">,</span> <span class="n">Mouse</span><span class="p">,</span> <span class="n">Keyboard</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators</span> <span class="kn">import</span> <span class="n">AutopilotGtkEmulatorBase</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">autopilotgtkemulators</span> <span class="kn">import</span> <span class="n">gtktoplevel</span><span class="p">,</span> <span class="n">gtkcontrols</span>
+<span class="kn">from</span> <span class="nn">autopilot.testcase</span> <span class="kn">import</span> <span class="n">AutopilotTestCase</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">join</span>
+
+<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;test-app&#39;</span><span class="p">:</span>
+            <span class="n">FULL_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="TestAppWindow"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.TestAppWindow">[docs]</a><span class="k">class</span> <span class="nc">TestAppWindow</span><span class="p">(</span><span class="n">gtktoplevel</span><span class="o">.</span><span class="n">GtkWindow</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TestAppWindow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbd</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="EmulatorTest"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest">[docs]</a><span class="k">class</span> <span class="nc">EmulatorTest</span><span class="p">(</span><span class="n">AutopilotTestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="EmulatorTest.setUp"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EmulatorTest</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_test_application</span><span class="p">(</span><span class="n">FULL_PATH</span><span class="p">,</span>
+                                                <span class="n">app_type</span><span class="o">=</span><span class="s">&#39;gtk&#39;</span><span class="p">,</span>
+                                                <span class="n">emulator_base</span><span class="o">=</span><span class="n">AutopilotGtkEmulatorBase</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointing_device</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">visible</span><span class="p">,</span> <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status_label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;statuslabel&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="EmulatorTest.main_window"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.main_window">[docs]</a>    <span class="k">def</span> <span class="nf">main_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="n">TestAppWindow</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="EmulatorTest.test_window"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_window">[docs]</a>    <span class="k">def</span> <span class="nf">test_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="p">,</span> <span class="n">gtktoplevel</span><span class="o">.</span><span class="n">GtkWindow</span><span class="p">)</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Contains</span><span class="p">(</span><span class="s">&#39;Test&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_click_gtkbutton"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_click_gtkbutton">[docs]</a>    <span class="k">def</span> <span class="nf">test_click_gtkbutton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtkbutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkButton was clicked&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_toolbar_entry"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_toolbar_entry">[docs]</a>    <span class="k">def</span> <span class="nf">test_toolbar_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkEntry&#39;</span><span class="p">,</span>
+                                               <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;toolbarentry&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkEntry</span><span class="p">)</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">enter_text</span><span class="p">(</span><span class="s">&#39;Hello Autopilot&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="s">&#39;Hello Autopilot&#39;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="EmulatorTest.test_openfile_dialog"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_openfile_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">test_openfile_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">open_openfile_dialog</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">gtktoplevel</span><span class="o">.</span><span class="n">GtkFileChooserDialog</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">go_to_directory</span><span class="p">(</span><span class="s">&#39;/tmp&#39;</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">enter_file_name</span><span class="p">(</span><span class="s">&#39;this_is_a_test_file_name&#39;</span><span class="p">)</span>
+        <span class="n">open_button</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkButton&#39;</span><span class="p">,</span> <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;openfile_button&#39;</span><span class="p">)</span>
+        <span class="n">open_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="EmulatorTest.test_save_dialog"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_save_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">test_save_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">open_save_dialog</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">gtktoplevel</span><span class="o">.</span><span class="n">GtkFileChooserDialog</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">go_to_directory</span><span class="p">(</span><span class="s">&#39;/tmp&#39;</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">enter_file_name</span><span class="p">(</span><span class="s">&#39;test_save_filename&#39;</span><span class="p">)</span>
+        <span class="n">save_button</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkButton&#39;</span><span class="p">,</span> <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;savefile_button&#39;</span><span class="p">)</span>
+        <span class="n">save_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="EmulatorTest.test_toolbar_button"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_toolbar_button">[docs]</a>    <span class="k">def</span> <span class="nf">test_toolbar_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkToolButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;toolbutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkToolButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkToolButton was clicked&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_toggle_toolbar_button"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_toggle_toolbar_button">[docs]</a>    <span class="k">def</span> <span class="nf">test_toggle_toolbar_button</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkToggleToolButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtktoggletoolbutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkToggleToolButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkToggleToolButton was clicked&#39;</span><span class="p">)))</span>
+        <span class="c">#TODO: test that it toggles</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_gtkmenutoolbutton"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_gtkmenutoolbutton">[docs]</a>    <span class="k">def</span> <span class="nf">test_gtkmenutoolbutton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkMenuToolButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtkmenutoolbutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkMenuToolButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkMenuToolButton was clicked&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_gtktogglebutton"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_gtktogglebutton">[docs]</a>    <span class="k">def</span> <span class="nf">test_gtktogglebutton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkToggleButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtktogglebutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkToggleButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkToggleButton was clicked&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_gtkcheckbutton"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_gtkcheckbutton">[docs]</a>    <span class="k">def</span> <span class="nf">test_gtkcheckbutton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkCheckButton&#39;</span><span class="p">,</span>
+                                                <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtkcheckbutton&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkCheckButton</span><span class="p">)</span>
+        <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_label</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+                        <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s">&#39;GtkCheckButton was clicked&#39;</span><span class="p">)))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_gtkentry"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_gtkentry">[docs]</a>    <span class="k">def</span> <span class="nf">test_gtkentry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkEntry&#39;</span><span class="p">,</span>
+                                               <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtkentry&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkEntry</span><span class="p">)</span>
+        <span class="n">entry</span><span class="o">.</span><span class="n">enter_text</span><span class="p">(</span><span class="s">&#39;Hello Autopilot&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="s">&#39;Hello Autopilot&#39;</span><span class="p">))</span>
+    </div>
+<div class="viewcode-block" id="EmulatorTest.test_gtktextview"><a class="viewcode-back" href="../../../autopilotgtkemulators.tests.html#autopilotgtkemulators.tests.test_emulator.EmulatorTest.test_gtktextview">[docs]</a>    <span class="k">def</span> <span class="nf">test_gtktextview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_window</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s">&#39;GtkTextView&#39;</span><span class="p">,</span>
+                                              <span class="n">BuilderName</span><span class="o">=</span><span class="s">&#39;gtktextview&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">gtkcontrols</span><span class="o">.</span><span class="n">GtkTextView</span><span class="p">)</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">enter_text</span><span class="p">(</span><span class="s">&#39;This is testing a GtkTextView&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">autopilotgtkemulators  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Dan Chapman.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
